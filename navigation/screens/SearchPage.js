@@ -1,23 +1,23 @@
-import React from 'react';
-import { Image, ImageBackground, StyleSheet, View } from 'react-native';
+import * as React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 
-import { NavigationContainer } from '@react-navigation/native';
-function SearchPage(props) {
-    return (
-        <ImageBackground>
-            <View style={StyleSheet.bottomBar}></View>
-        </ImageBackground>
-    );
+export default function SearchPage({navigation}){
+    <View style={StyleSheet.search}>
+        <Text
+            onPress={() => navigation.navigate('Home')} 
+            style={StyleSheet.searchText}>Search Page
+        </Text>
+    </View>
 }
 
 const styles = StyleSheet.create({
-    
-    bottomBar: {
-        width: '100%',
-        height: 60,
-        color: 'red',
-        justifyContent: 'flex-end',
-    }
+    search: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    searchText: {
+        fontSize: 26,
+        fontWeight: 'bold',
+    },
 })
-
-export default SearchPage;
