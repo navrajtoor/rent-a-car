@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-export default function HomeScreen({navigation}){
+export default function HomePage({navigation}){
     <View style={StyleSheet.home}>
         <Text
             onPress={() => alert('This is the Home page')} 
