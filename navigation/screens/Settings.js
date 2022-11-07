@@ -4,7 +4,7 @@ import { View, Text } from 'react-native';
 export default function Settings({navigation}){
     <View style={StyleSheet.settings}>
         <Text
-            onPress={() => alert('This is the Settings page')} 
+            onPress={() => navigation.navigate('Home')} 
             style={StyleSheet.settingsText}>Settings Page
         </Text>
     </View>
