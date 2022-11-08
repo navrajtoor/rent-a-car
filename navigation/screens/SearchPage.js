@@ -3,36 +3,30 @@ import {useState, useEffect} from 'react';
 import { View, Text, StyleSheet, ActivityIndicator, FlatList } from 'react-native';
 
 export default function SearchPage({ navigation }) {
-    
-    const API_KEY = process.env.REACT_APP_API_KEY;
-    const url = "https://myfakeapi.com/api/cars/?apikey=" + API_KEY;
+    //from myfakeapi
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
 
-    // variables for api
-    const [response, setResponse] = useState([]) // state for 
-    const [loading, setLoading] = useState(true) // state to show if api is loading
-    const [error, setError] = useState(); // for any errors
+    var raw = JSON.stringify({
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFzIiwicGFzc3dvcmQiOiIxMjMiLCJ3ZWJzaXRlIjoid3d3Lm15ZmFrZWFwaS5jb20iLCJpYXQiOjE1NzM1NDMzNjcsImV4cCI6MTU3MzU0NTE2N30.95fFJcUIOsTVLrTNxSVdk4loPQnwWx9tBGJIb19o65"
+    });
 
-    const searchCars = async(car) =>{
-        const response = await fetch(`${url}&s=${car}`);
-        const data = await response.json();
-        setCars(data.Search)
-    }
+    var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+    };
 
-    useEffect(() => {
-         fetch(url)// fetch data from api url
-        .then((response)=>response.json())// store response in response.json
-        .then((json)=>setResponse(json))// setData from json
-        .catch((error) => alert("Problem with your fetch operation" + error))// error handling
-        .finally(() => setLoading(false))// set loading to false when we are done with getting info from api
-    }, [])
-
+    fetch("https://myfakeapi.com/api/cars/", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+   
     return(
         <View style={StyleSheet.search}>
             <View>
-                {loading ? <ActivityIndicator/> : 
-                <FlatList style={StyleSheet.card}
-                    data={response}
-                />}
+                <Text></Text>
             </View>
         </View>
     )
