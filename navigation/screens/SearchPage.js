@@ -2,74 +2,36 @@ import * as React from 'react';
 import {useState, useEffect} from 'react';
 import { View, Text, StyleSheet, ActivityIndicator, FlatList } from 'react-native';
 
-export default function SearchPage({ navigation }) {
+export default function SearchPage() {
     
-    const url = "https://myfakeapi.com/api/cars";
+    const url = "https://myfakeapi.com/api/cars/";
 
-    // variables for api
-    const [response, setResponse] = useState([]) // state for 
-    const [loading, setLoading] = useState(true) // state to show if api is loading
-    const [error, setError] = useState(); // for any errors
-
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    
-    var raw = JSON.stringify({
-        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFzIiwicGFzc3dvcmQiOiIxMjMiLCJ3ZWJzaXRlIjoid3d3Lm15ZmFrZWFwaS5jb20iLCJpYXQiOjE1NzM1NDMzNjcsImV4cCI6MTU3MzU0NTE2N30.95fFJcUIOsTVLrTNxSVdk4loPQnwWx9tBGJIb19o65"
-    });
-    
-    var requestOptions = {
-        method: 'GET',
-        headers: myHeaders,
-        redirect: 'follow',
-        id: 'id',
-        car: 'car',
-        model: 'car_model',
-        color: 'car_color',
-        modelYear: 'car_model_year',
-        vin: 'car_vin',
-        price: 'price',
-        availability: 'availability',
-    };
-    
-    const searchCars = async(car) =>{
-        const response = await fetch(`${url}&s=${car}`);
-        const data = await response.json();
-        setCars(data.Search)
-    }
-
-    fetch("https://myfakeapi.com/api/cars/", requestOptions)
-    .then((response) => {
-        
-        return response.text()
-    })
-    .then((result) => {
-        console.log(result)
-        setLoading(false);
-        setResponse(result);
-    })
-    .catch((error) => {
-        setLoading(false);
-        setError(error);
-        console.log('error', error)
-    })
+    // hooks for api
+    const [cars, setCars] = useState([]); 
+    const [isLoading, setLoading] = useState([]);
+    //fetch data from api in json, set cars to data in json, catch any errors, set loading to false
     useEffect(() => {
-        searchCars('');
-    }, [])
-
-    const getContent = () => {
-        if(loading){
-            return <ActivityIndicator/>
-        }
-        if(error){
-            return <Text>error</Text>
-        }
-        return <Text>{response}</Text>
-    };
-
+        fetch(url)
+          .then((response) => response.json())
+          .then((json) => setCars(json))
+          .catch((error) => console.error(error))
+          .finally(() => setLoading(false));
+      }, []);
+    // in return, render our data from api
     return(
         <View style={StyleSheet.search}>
-            {getContent()}
+            {isLoading ? <ActivityIndicator/> : 
+                ( <View>
+                    <Text style={{ fontSize: 18, color: '#5ced73', textAlign: 'center'}}>Rent-A-Car</Text>
+                    <FlatList
+                        data={cars.cars}
+                        keyExtractor={({ id }, index) => id}
+                        renderItem={({ item }) => (
+                            <Text>{item.id + '. ' + item.car + ' ' + item.car_model + ' ' + item.car_color +' ' + item.car_model_year + ' ' + item.car_vin + ' ' + item.price + ' ' + item.availability + '\n'}</Text>
+                        )}
+                    />
+                </View>
+            )}
         </View>
     )
 }

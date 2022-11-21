@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-export default function HomePage({navigation}){
+export default function HomePage(){
     <View style={StyleSheet.home}>
-        <Text
-            onPress={() => alert('This is the Home page')} 
-            style={StyleSheet.homeText}>Home Page
+        <Text style={StyleSheet.homeText}>
+            Home Page
         </Text>
     </View>
 }
