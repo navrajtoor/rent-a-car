@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {useState, useEffect} from 'react';
 import { View, Text, StyleSheet, ActivityIndicator, FlatList } from 'react-native';
+import CarCard from 'C:/Users/Navraj Toor/Documents/react-native-projects/rent-a-car/rent-a-car/components/CarCard.js';
 
 export default function SearchPage() {
     
@@ -27,7 +28,7 @@ export default function SearchPage() {
                         data={cars.cars}
                         keyExtractor={({ id }, index) => id}
                         renderItem={({ item }) => (
-                            <Text>{item.id + '. ' + item.car + ' ' + item.car_model + ' ' + item.car_color +' ' + item.car_model_year + ' ' + item.car_vin + ' ' + item.price + ' ' + item.availability + '\n'}</Text>
+                            <CarCard item = {item}/>
                         )}
                     />
                 </View>
