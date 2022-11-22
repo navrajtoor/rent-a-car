@@ -6,10 +6,18 @@ const CarCard = ({item}) => {
         <View style = {styles.container}>
             <View style = {styles.carCard}>
                 <View style = {styles.title}>
-                    <Text style = {styles.carName}>{item.car_model_year + ' ' + item.car + ' ' + item.car_model}</Text>
-                    <Text> {item.price}/day</Text>
+                    <Text style = {styles.carName}>{item.car + ' ' + item.car_model}</Text>
+                    <Text style = {{fontSize: 16, textAlign: 'right'}}> {item.price}/day</Text>
                 </View>
-                <Text style = {styles.bodyOfCard}>Color: {' ' + item.car_color}</Text>
+                <View style = {styles.bodyOfCard}>
+                    <View style = {{alignSelf: 'flex-end'}}>
+                        <Text style = {{textAlign: 'right'}}>Year: {item.car_model_year}</Text>
+                        <Text style = {{textAlign: 'right'}}>Color: {item.car_color}</Text>
+                        <Text style = {{textAlign: 'right'}}>VIN: {item.car_vin}</Text>
+                        <Text style = {{textAlign: 'right'}}>Available: {item.availability ? <Text>Available to Rent</Text> : <Text>Not Available to Rent</Text>}</Text>
+                    </View>
+                    <Image source = {{uri: 'https://picsum.photos/id/655/500'}} style = {{height: 60, width: 60}}/>
+                </View>
             </View>
         </View>
     );
@@ -26,20 +34,20 @@ const styles = StyleSheet.create({
         borderWidth: 2, 
         borderRadius: 4,
         padding: 10,
-        justifyContent: 'space-between',
+        justifyContent: 'space-between'
     },
     title: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'space-between'
     },
     carName: {
         color: 'blue',
-        fontSize: 15,
+        fontSize: 17
     },
     bodyOfCard: {
-        justifyContent: 'flex-end'
+        flexDirection: 'row-reverse',
+        justifyContent: 'space-between',
+        paddingTop: 10
     }
 })
 export default CarCard
-
-//+ ' ' + item.car_color +' ' + item.car_model_year + ' ' + item.car_vin + ' ' + item.price + ' ' + item.availability + '\n'
