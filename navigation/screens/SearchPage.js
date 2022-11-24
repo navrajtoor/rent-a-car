@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useState, useEffect} from 'react';
 import { View, Text, StyleSheet, ActivityIndicator, FlatList } from 'react-native';
-import CarCard from 'C:/Users/navra/OneDrive/Documents/GitHub/rent-a-car/components/CarCard.js';
+import CarCard from './components/CarCard.js';
 
 export default function SearchPage() {
     
