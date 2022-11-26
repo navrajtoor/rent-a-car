@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 //imports for navigation bar
-import { NavigationContainer, TabActions } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -25,7 +25,7 @@ export default function MainContainer(){
                 screenOptions={({route}) => ({
                     
                     //styling for tab bar 
-                    tabBarActiveTintColor: '#5ced73',
+                    tabBarActiveTintColor: '#009688',
                     tabBarInactiveTintColor: 'grey',
                     style: {padding: 10, height: 70},
                     labelStyle: { paddingBottom: 10, fontSize: 10},
