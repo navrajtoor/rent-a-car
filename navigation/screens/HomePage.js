@@ -2,11 +2,13 @@ import * as React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 export default function HomePage(){
-    <View style={StyleSheet.home}>
-        <Text style={StyleSheet.homeText}>
-            Home Page
-        </Text>
-    </View>
+    return(
+        <View style={StyleSheet.home}>
+            <Text style={StyleSheet.homeText}>
+                This is a placeholder home page
+            </Text>
+        </View>
+    )
 }
 
 const styles = StyleSheet.create({

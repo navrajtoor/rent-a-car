@@ -1,10 +1,18 @@
+import { BottomTabBar } from '@react-navigation/bottom-tabs';
+
+import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
 import {useState, useEffect} from 'react';
 import { View, Text, StyleSheet, ActivityIndicator, FlatList, TextInput, SafeAreaView } from 'react-native';
+//import { createDrawerNavigator } from '@react-navigation/drawer'; 
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import CarCard from './components/CarCard.js';
+//import FilterDrawer from './components/FilterDrawer.js'
 
-export default function SearchPage() {
+
+
+export default function SearchPage( {navigation} ) {
     
     const url = "https://myfakeapi.com/api/cars/";
 
@@ -29,13 +37,21 @@ export default function SearchPage() {
         <SafeAreaView style = {{ flex:1 }}>
             {isLoading ? <ActivityIndicator/> : 
                 ( <View>
-                    <Text style={{ fontSize: 18, color: '#009688', textAlign: 'center'}}>Rent-A-Car</Text>
-                    <TextInput 
-                        style = {styles.input}
-                        value = {searchTerm}
-                        placeholder = "Search for a car"
-                        onChangeText= {e => {setSearchTerm(e)}}
-                    />                    
+                    <View style = {styles.searchBar}>
+                        <TextInput 
+                            style = {styles.input}
+                            value = {searchTerm}
+                            placeholder = "Search for a car"
+                            onChangeText= {e => {setSearchTerm(e)}}
+                        /> 
+                    <Ionicons 
+                        name='list' 
+                        size={40} 
+                        color='#009688' 
+                        style={styles.filter}
+                        onPress = {() => navigation.navigate('FilterDrawer')} 
+                    />       
+                    </View>
                     <FlatList 
                         data={cars.cars}
                         keyExtractor={({ id }) => id}
@@ -59,18 +75,64 @@ export default function SearchPage() {
         </SafeAreaView>
     )
 }
-
+/*const drawerStack = createDrawerNavigator({
+    drawer: {
+        screen: BottomTabBar
+    },
+}, {
+    contentComponent: Drawer,
+    drawerPosition: 'right'
+})
+*/
 const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         alignItems: 'center',
     },
+    searchBar: {
+        flexDirection: 'row',
+        justifyContent: 'space-between', 
+        alignItems: 'center'
+    },
     input: {
-        height: 40,
+        height: 35,
+        width: 325,
         borderWidth: 1,
         paddingLeft: 20,
         margin: 10,
         borderColor: '#009688',
         backgroundColor: 'white'
+    },
+    filter: {
+        alignSelf: 'right',
+        justifyContent: 'center',
+        paddingRight: 20,
+        paddingTop: 5
     }
 })
+//navigation.navigate('FilterDrawer', { screen: 'FilterDrawer' })
+/*                       <Ionicons 
+                            name='list' 
+                            size={40} 
+                            color='#009688' 
+                            style={styles.filter}
+                            onPress = {() =>                
+                                navigation.navigate('FilterDrawer', { screen: 'FilterDrawer' })
+                            }
+                        />
+
+name={filterName} 
+                    component={FilterDrawer}
+                    options={({ navigation }) => ({
+                        headerRight: () => (
+                            <Ionicons 
+                                name='list' 
+                                size={40} 
+                                color='#009688' 
+                                style={styles.filter}
+                                onPress = {() =>                
+                                    navigation.navigate('FilterDrawer', { screen: 'FilterDrawer' })
+                                }
+                            />       
+                        )
+                    })}                        */

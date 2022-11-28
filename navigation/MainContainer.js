@@ -1,22 +1,33 @@
 import * as React from 'react';
 
 //imports for navigation bar
-import { NavigationContainer } from '@react-navigation/native';
+import { DrawerActions, NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
+//import { createDrawerNavigator } from '@react-navigation/drawer';
 //imports for screens
 import HomePage from './screens/HomePage';
 import SearchPage from './screens/SearchPage';
 import Settings from './screens/Settings';
+import FilterDrawer from './screens/components/FilterDrawer.js'
 
 // variables for holding the names of different variables
 const homeName = 'Home'
 const searchName = 'Search'
 const settingsName = 'Settings'
+const filterName = 'Filter'
 
 const tab = createBottomTabNavigator();
 
+//const drawer = createDrawerNavigator();
+
+/*function DrawerRoutes() {
+    return(
+        <DrawerRoutes.Navigator>
+            <DrawerRoutes.screen name='Filter' component={FilterDrawer}/>
+        </DrawerRoutes.Navigator>
+    )
+}*/
 export default function MainContainer(){
     return(
         <NavigationContainer>
@@ -60,3 +71,8 @@ export default function MainContainer(){
         </NavigationContainer>
     )
 }
+/*                <drawer.Navigator initialRouteName={homeName}>
+                    <drawer.Screen 
+                        name={filterName} component={FilterDrawer}
+                    />
+                </drawer.Navigator>*/

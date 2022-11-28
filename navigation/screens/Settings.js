@@ -2,11 +2,13 @@ import * as React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 export default function Settings(){
-    <View style={StyleSheet.settings}>
-        <Text style={StyleSheet.settingsText}>
-            Settings Page
-        </Text>
-    </View>
+    return(
+        <View style={StyleSheet.settings}>
+            <Text style={StyleSheet.settingsText}>
+                This is a placeholder settings page
+            </Text>
+        </View>
+    )
 }
 
 const styles = StyleSheet.create({
