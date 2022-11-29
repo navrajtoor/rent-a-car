@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {useState, useEffect} from 'react';
 import { View, Text, StyleSheet, ActivityIndicator, FlatList, TextInput, SafeAreaView, Modal } from 'react-native';
-//import { createDrawerNavigator } from '@react-navigation/drawer'; 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import CarCard from './components/CarCard.js';

@@ -1,14 +1,23 @@
 import React from 'react';
+import { useState } from 'react';
 import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 
-const WIDTH = Dimensions.get('window').width
+const WIDTH = Dimensions.get('window').width// width of device window
 const HEIGHT = 550;
 
-const FilterModal = (props) => {
+/*const [make, setMake] = useState();
+const [model, setModel] = useState();
+const [year, setYear] = useState();
+const [color, setColor] = useState();
+const [price, setPrice] = useState();*/
+
+const FilterModal = (props, {item}) => {
+    // close the modal
     closeModal = (bool) => {
         props.changeModalVisible(bool);
 
     }
+
     return(
         <TouchableOpacity 
             disabled={true}
@@ -16,9 +25,24 @@ const FilterModal = (props) => {
         >
             <SafeAreaView style = {styles.modal}>
                     <View>
-                        <Text>Filters</Text>
+                        <Text style={styles.title}>Filters</Text>
                     </View>
-                    <View style={styles.buttonView}>
+                    <View style={styles.item}>
+                        <Text style={styles.subtitle}>Make</Text>
+                    </View>
+                    <View style={styles.item}>
+                        <Text style={styles.subtitle}>Model</Text>
+                    </View>
+                    <View style={styles.item}>
+                        <Text style={styles.subtitle}>Year</Text>
+                    </View>
+                    <View style={styles.item}>
+                        <Text style={styles.subtitle}>Color</Text>
+                    </View>
+                    <View style={styles.item}>
+                        <Text style={styles.subtitle}>Price</Text>
+                    </View>
+                    <View style={styles.bottomButtonView}>
                         <TouchableOpacity 
                             style={styles.touchable}
                         >
@@ -28,7 +52,7 @@ const FilterModal = (props) => {
                             style={styles.touchable} 
                             onPress={() => closeModal(false, 'Cancel')}
                         >
-                            <Text style={styles.cancelButton}>Cancel</Text>
+                            <Text style={styles.cancelButton}>Cancel</Text> 
                         </TouchableOpacity>
                     </View>
             </SafeAreaView>
@@ -51,7 +75,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderRadius: 4,
     },
-    buttonView: {
+    bottomButtonView: {
         width: '100%',
         flexDirection: 'row'
     },
@@ -65,5 +89,19 @@ const styles = StyleSheet.create({
     },
     cancelButton: {
         color: '#009688'
+    },
+    title: {
+        color: '#009688',
+        fontWeight: 'bold',
+        fontSize: 17,
+        padding: 10 
+    },
+    item: {
+        marginVertical: 10
+    },
+    subtitle: {
+        color: '#009688',
+        fontSize: 17,
+        padding: 10
     }
 })
