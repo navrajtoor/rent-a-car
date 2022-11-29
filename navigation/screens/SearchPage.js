@@ -1,18 +1,15 @@
-import { BottomTabBar } from '@react-navigation/bottom-tabs';
-
-import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
 import {useState, useEffect} from 'react';
-import { View, Text, StyleSheet, ActivityIndicator, FlatList, TextInput, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator, FlatList, TextInput, SafeAreaView, Modal } from 'react-native';
 //import { createDrawerNavigator } from '@react-navigation/drawer'; 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import CarCard from './components/CarCard.js';
-//import FilterDrawer from './components/FilterDrawer.js'
+import FilterModal from './components/FilterModal.js';
 
 
 
-export default function SearchPage( {navigation} ) {
+export default function SearchPage( ) {
     
     const url = "https://myfakeapi.com/api/cars/";
 
@@ -21,7 +18,15 @@ export default function SearchPage( {navigation} ) {
     const [isLoading, setLoading] = useState([]);
 
     // hook for searching
-    const [searchTerm, setSearchTerm] = useState("")
+    const [searchTerm, setSearchTerm] = useState("");
+
+    // hooks for modal filter
+    const [isModalVisibile, setModalVisible] = useState(false);
+    
+    //change the visibility of the modal
+    const changeModalVisible = (bool) =>{
+        setModalVisible(bool);
+    }
 
     //fetch data from api in json, set cars to data in json, catch any errors, set loading to false
     useEffect(() => {
@@ -44,12 +49,22 @@ export default function SearchPage( {navigation} ) {
                             placeholder = "Search for a car"
                             onChangeText= {e => {setSearchTerm(e)}}
                         /> 
+                    <Modal
+                        transparent = {true}
+                        animationType='fade'
+                        visible={isModalVisibile}
+                        nRequestClose={() => changeModalVisible(false)} 
+                        >  
+                        <FilterModal
+                            changeModalVisible={changeModalVisible}
+                        />         
+                    </Modal>
                     <Ionicons 
                         name='list' 
                         size={40} 
                         color='#009688' 
                         style={styles.filter}
-                        onPress = {() => navigation.navigate('FilterDrawer')} 
+                        onPress = {() => setModalVisible(true)} 
                     />       
                     </View>
                     <FlatList 
@@ -75,15 +90,7 @@ export default function SearchPage( {navigation} ) {
         </SafeAreaView>
     )
 }
-/*const drawerStack = createDrawerNavigator({
-    drawer: {
-        screen: BottomTabBar
-    },
-}, {
-    contentComponent: Drawer,
-    drawerPosition: 'right'
-})
-*/
+
 const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
@@ -110,29 +117,3 @@ const styles = StyleSheet.create({
         paddingTop: 5
     }
 })
-//navigation.navigate('FilterDrawer', { screen: 'FilterDrawer' })
-/*                       <Ionicons 
-                            name='list' 
-                            size={40} 
-                            color='#009688' 
-                            style={styles.filter}
-                            onPress = {() =>                
-                                navigation.navigate('FilterDrawer', { screen: 'FilterDrawer' })
-                            }
-                        />
-
-name={filterName} 
-                    component={FilterDrawer}
-                    options={({ navigation }) => ({
-                        headerRight: () => (
-                            <Ionicons 
-                                name='list' 
-                                size={40} 
-                                color='#009688' 
-                                style={styles.filter}
-                                onPress = {() =>                
-                                    navigation.navigate('FilterDrawer', { screen: 'FilterDrawer' })
-                                }
-                            />       
-                        )
-                    })}                        */

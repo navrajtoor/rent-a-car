@@ -42,7 +42,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     carName: {
-        color: 'blue',
+        color: '#009688',
+        fontWeight: 'bold',
         fontSize: 17
     },
     bodyOfCard: {
