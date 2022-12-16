@@ -1,0 +1,5 @@
+This project displays car listings and lets users scroll through, search, and filter through those listings. 
+When building this I assumed that using any online react native library's was allowed. I also assumed that it was alright to use one image for all of the listings. I assumed this, as in a real life situation it would be possible to have the user uploaded images with the related car data, so in this sample I have kept a single static image. 
+The filter aspect of this project was definitely something that I had the most problems with (if you look at the comments near the bottom you can see some attempted logic at a filter function). As of now, the filter uses the same logic as the search bar and also only allows you to filter between one of make, year, and color. This is definitely an aspect to be improved upon for a better user experience. 
+
+Overall, this was an interesting project to attempt. Having never had any react native experience, this is something that forced me out of my comfort zone and learn something new. 
